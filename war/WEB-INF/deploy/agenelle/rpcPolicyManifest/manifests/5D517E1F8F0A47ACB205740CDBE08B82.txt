@@ -1,0 +1,2 @@
+serviceClass: com.genelle.alexandre.client.GreetingService
+path: 6F3122B6A6B87279DE79507712F151AF.gwt.rpc
