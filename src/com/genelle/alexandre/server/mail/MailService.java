@@ -19,8 +19,16 @@ public abstract class MailService {
 	protected Message message;
 	protected MailBean mailBean;
 	
-	public MailService(MailBean mailBean) {
+	protected MailBean getMailBean() {
+		return mailBean;
+	}
+
+	protected void setMailBean(MailBean mailBean) {
 		this.mailBean = mailBean;
+	}
+
+	public MailService() {
+		
 	}
 	
 	protected abstract boolean checkConditions();
@@ -28,9 +36,10 @@ public abstract class MailService {
 	protected abstract void buildMessage(MailBean mailBean) throws UnsupportedEncodingException, MessagingException;
 	
 	
-	public ResponseBean sendMail() {
+	public ResponseBean sendMail(MailBean mailBean) {
 		
 		LOG.info("MailService - sendMail");
+		this.mailBean = mailBean;
 		ResponseBean responseBean = new ResponseBean();
 		
 		try {

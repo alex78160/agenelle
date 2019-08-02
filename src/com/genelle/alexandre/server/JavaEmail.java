@@ -125,7 +125,7 @@ public final class JavaEmail
          * */
     	
         String fromUser = "alexandregenelle2@gmail.com";
-        String fromUserEmailPassword = "4K7.cd.MD10";
+        String fromUserEmailPassword = "***";
 
         String emailHost = "smtp.gmail.com";
         Transport transport = mailSession.getTransport("smtp");

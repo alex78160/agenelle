@@ -1,13 +1,28 @@
-/** Add css rules here for your application. */
 
 
-/** Example rules used by the template application (remove for your app) */
+body {
+	color: black;
+	margin: 10px;
+	border: 0px;
+	padding: 0px;
+	font-family: Arial Unicode MS, Arial, sans-serif;
+}
+
 h1 {
-  font-size: 2em;
+  font-size: 1.8em;
   font-weight: bold;
   color: #777777;
   margin: 40px 0px 70px;
   text-align: center;
+}
+
+.head-wrapper {
+	height: 250px;
+	padding-top: 20px;
+}
+
+.main-wrapper {
+	width: 80%
 }
 
 .sendButton {
@@ -28,14 +43,25 @@ h1 {
   color: red;
 }
 
-.liens a {
+.liens a, a:visited {
 	cursor: pointer;
+	color: #0066cc;
+	text-decoration: none;
 }
 
-.liens {
-	margin-left: 100px;
-	font-size: 16px;
-	padding-bottom: 30px;
+.liens a {
+	margin-left: 20px;
+	
+}
+
+.liens img {
+	padding-top: 0.8em;
+}
+
+.liens p {
+	margin-bottom: 0.1em;
+	margin-top: 0.5em;
+	font-size: 20px;
 }
 
 .erreur {
@@ -54,6 +80,10 @@ fieldset { padding:0; border:0; margin-top:25px; }
 	margin:0 7px 30px 0;
 }
 
+#accordion h2 {
+	
+}
+
 #dialog-message span {
 	float:left;
 	margin:0 7px 45px 0;
@@ -62,4 +92,33 @@ fieldset { padding:0; border:0; margin-top:25px; }
 /** Set ids using widget.getElement().setId("idOfElement") */
 #closeButton {
   margin: 15px 6px 6px;
+}
+
+.ui-dialog p, label, span, input, textarea {
+	font-size : 0.9em;
+}
+
+#name {
+	font-size : 0.9em;
+}
+
+#checkTokenAnimError {
+	background-image: url("error.png");
+	background-repeat: no-repeat;
+	background-size: 22px 22px;
+	padding-left: 30px;
+}
+
+#checkTokenAnimTime {
+	background-image: url("error.png");
+	background-repeat: no-repeat;
+	background-size: 22px 22px;
+	padding-left: 30px;
+}
+
+#checkTokenAnimOK {
+	background-image: url("ok.png");
+	background-repeat: no-repeat;
+	background-size: 22px 22px;
+	padding-left: 30px;
 }

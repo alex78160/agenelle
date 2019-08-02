@@ -46,11 +46,8 @@ public class DlServlet extends HttpServlet {
 			case 1:
 				file = "data.txt";
 				break;
-			case 2:
-				file = "Resume-Alexandre-Genelle-en.pdf";
-				break;
 			case 3:
-				file = "CV-Alexandre-Genelle-fr.pdf";
+				file = "CV_Alexandre_Genelle.pdf";
 				break;
 			default:
 				processError(resp);

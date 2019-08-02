@@ -9,12 +9,13 @@
     
     <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
 
-    <link type="text/css" rel="stylesheet" href="Agenelle.css"/>
     <!--[if lt IE 8]>
       <script type="text/javascript">window['badBrowser'] = true;</script>
     <![endif]-->
+    
     <link rel="stylesheet" href="jquery-ui-1.10.4/css/smoothness/jquery-ui-1.10.4.custom.css">
-    <script type="text/javascript" src="agenelle/agenelle.nocache.js"></script>
+    <link type="text/css" rel="stylesheet" href="Agenelle.css"/>
+    
     <script type="text/javascript" src="jquery-1.11.1.js"></script>
     <script src="jquery-ui-1.10.4/js/jquery-ui-1.10.4.custom.js"></script>
     <script src="ag.js"></script>
@@ -35,70 +36,106 @@
       </div>
     </noscript>
 
-    <h1>Alexandre Genelle - page en construction...</h1>
-    
-    <h2>Pr&eacute;sentation</h2>
-    <div class="liens">
-        <a id="resume">English Resume</a>
-        <br/>
-        <a id="cv">CV</a>
-        <br/>
-        <a href="//plus.google.com/u/0/101702994833105924335?prsrc=3"
-          rel="publisher" target="_top" style="text-decoration:none;">
-          <img src="//ssl.gstatic.com/images/icons/gplus-16.png" alt="Google+" style="border:0;width:16px;height:16px;"/>
-        </a>
-        <br/>
-    </div>
+<div class="head-wrapper">
+	<div style="width: 70%; ">
+	    <h1>Alexandre Genelle - page en construction...</h1>
+	</div>    
+	<div id="ag-pic">
+		<img alt="" src="ag2-3.jpg" width="197px" height="264px;" style="position:absolute; top: 0; right: 0; margin-top: 10px; margin-right: 10px;">
+	</div>
+</div>    	
 
-    <h2>Albums photo - vid&eacute;o</h2>
-    <div class="liens">
-        <a href="https://plus.google.com/photos/101702994833105924335/albums/5818544810934212497">Nouvelle Z&eacute;lande 2012</a>
-        <br/>
-        <a href="https://plus.google.com/photos/101702994833105924335/albums/5655624160589666321">Bolivie 2011</a>
-        <br/>
-        <a href="https://plus.google.com/photos/101702994833105924335/albums/5520836963090655873">Zanzibar 2010</a>
-        <br/>
-        <a href="https://plus.google.com/photos/101702994833105924335/albums/5388321562252428049">Hawaii 2009</a>
-        <br/>
-    </div>
-    
-    <br/>
-    
-    <div id="dialog-form" title="Envoyer un message">
-      <p class="validateTips">Tous les champs sont obligatoires.</p>
-      <form>
-        <fieldset>
-          <label for="name">votre nom</label>
-          <input type="text" name="name" id="name" class="text ui-widget-content ui-corner-all">
-          <label for="email">votre email</label>
-          <input type="text" name="email" id="email" value="" class="text ui-widget-content ui-corner-all">
-          <label for="msg">message</label>
-          <textarea rows="7" name="msg" id="msg" class="text ui-widget-content ui-corner-all"></textarea>
-        </fieldset>
-      </form>
-    </div>
-    <div id="dialog-message" title="Transmission du message" style="display: none;">
-      <div id="encours">
-        <p>
-          <img src="wait.gif"></img>
-          Envoi en cours ...
-        </p>
-      </div>
-      <div style="display: none;" id="envoye">
-        <p>
-          <span class="ui-icon ui-icon-circle-check"></span>
-          Votre message a bien &eacute;t&eacute; envoy&eacute;
-        </p>
-      </div>
-      <div style="display: none;" id="erreur" class="erreur">
-        <p>
-          Erreur lors de l'envoi. Essayez plus tard.
-        </p>
-      </div>
-    </div>
- 
+<div class="main-wrapper">
+	<div id="accordion">
+	    <h2>Pr&eacute;sentation</h2>
+	    <div class="liens">
+	        <p><a id="cv">CV</a></p>
+	    </div>
+	
+	    <h2>Albums photo - vid&eacute;o</h2>
+	    <div class="liens">
+	        <p><a id="nz2012">Nouvelle Z&eacute;lande 2012</a></p>
+	        <p><a id="bol2011">Bolivie 2011</a></p>
+	        <p><a id="zz2010">Zanzibar 2010</a></p>
+	        <p><a id="hw2009">Hawaii 2009</a></p>
+	        <!--
+	        <p><button id="btest" value="valtest">Bouton</button></p>
+	        <p id="ptest">ptest</p>
+	        -->
+	        <br/>
+	    </div>
+	    
+		<h2>Contact</h2>
+		<div>
+		    <p>Vous pouvez me contacter en cliquant sur le bouton pour remplir le formulaire</p>
+	    	<button id="send-message">&Eacute;crire un message</button>
+	    </div>
+	    
+	    <h2>Liens utiles</h2>
+		<div>
+		    <p>Cette section sera remplie prochainement</p>
+	    </div>
+	    
+	    <h2>restricted area</h2>
+		<div>
+			<table>
+				<tr>
+					<td>
+			    		<p>Veuillez saisir votre clé d'identification générée par Google Authenticator</p>
+		    			<input type="text" id="key" maxlength="6"/>
+		    		</td>
+		    		<td style="padding-left: 30px; vertical-align: bottom;">
+	         			<div id="checkTokenAnim" style="display: none;">
+	         				<img src="wait.gif"></img>
+	         				Vérification ...
+	         			</div>
+	         			<div id="checkTokenAnimError" style="display: none;">
+	         				Clé invalide ...
+	         			</div>
+	         			<div id="checkTokenAnimTime" style="display: none;">
+	         				Réessayez plus tard ...
+	         			</div>
+	         			<div id="checkTokenAnimOK" style="display: none;">
+	         				Clé correcte, vous connaissez la suite...
+	         			</div>
+	         		</td>
+       			</tr>
+	    	</table>
+	    </div>
+	</div>
+</div>
 
-    <button id="send-message">&Eacute;crire un message</button>
-
+<div id="dialog-form" class="msg-box" title="Envoyer un message">
+	<p class="validateTips">Tous les champs sont obligatoires.</p>
+	<form>
+       <fieldset>
+         <label for="name">votre nom</label>
+         <input type="text" name="name" id="name" class="text ui-widget-content ui-corner-all">
+         <label for="email">votre email</label>
+         <input type="text" name="email" id="email" value="" class="text ui-widget-content ui-corner-all">
+         <label for="msg">message</label>
+         <textarea rows="7" name="msg" id="msg" class="text ui-widget-content ui-corner-all"></textarea>
+       </fieldset>
+     </form>
+   </div>
+<div id="dialog-message" title="Transmission du message" style="display: none;">
+   <div id="encours">
+       <p>
+         <img src="wait.gif"></img>
+         Envoi en cours ...
+       </p>
+   </div>
+   <div style="display: none;" id="envoye">
+       <p>
+         <span class="ui-icon ui-icon-circle-check"></span>
+         Votre message a bien &eacute;t&eacute; envoy&eacute;
+       </p>
+   </div>
+   <div style="display: none;" id="erreur" class="erreur">
+       <p>
+         Erreur lors de l'envoi. Essayez plus tard.
+       </p>
+   </div>
+</div>
   </body>
 </html>

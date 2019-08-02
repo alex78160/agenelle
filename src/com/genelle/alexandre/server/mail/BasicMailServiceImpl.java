@@ -31,8 +31,8 @@ public class BasicMailServiceImpl extends MailService {
     private static int compteurGlobal = 0;
 	
 	
-	public BasicMailServiceImpl(MailBean mailBean) {
-		super(mailBean);
+	public BasicMailServiceImpl() {
+		super();
 		LOG.info("BasicMailServiceImpl - init");
 		Properties props = new Properties();
 		session = Session.getDefaultInstance(props, null);
@@ -96,6 +96,7 @@ public class BasicMailServiceImpl extends MailService {
     		return false;
     	}
 
+    	//FIXME l'incrémentation du compteur n'a rien à faire ici !!!
     	compteur++;
     	compteurGlobal++;
 

@@ -1,7 +1,9 @@
 package com.genelle.alexandre.server;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Date;
+import java.util.Properties;
 import java.util.logging.Logger;
 
 import javax.servlet.ServletException;
@@ -13,9 +15,7 @@ import com.genelle.alexandre.server.mail.MailService;
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
-import com.google.appengine.api.datastore.EntityNotFoundException;
 import com.google.appengine.api.datastore.Key;
-import com.google.appengine.api.datastore.KeyFactory;
 
 public class ServletOne extends HttpServlet {
 	
@@ -23,16 +23,41 @@ public class ServletOne extends HttpServlet {
 	 * 
 	 */
 	private static final long serialVersionUID = -3692227770570704960L;
-	private static final String CONTROL = "cd.DVD.bd10_14nval!_09071988_TwEEt";
+	
 	private static final Logger LOG = Logger.getLogger(MailService.class.getName());
+	
+	private static int MAX = 10;
+	private static int COUNT = 0;
 
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		
+		if (COUNT >= MAX) {
+			LOG.warning("COUNT="+COUNT+" - max atteint -> pas de traitement");
+			return;
+		}
+		else {
+			COUNT++;
+		}
+		
+		String secretToken = "";
+		try {
+			Properties props = new Properties();
+			try (InputStream in = getServletContext().getResourceAsStream("/props-ignore.properties")) {
+				props.load(in);
+				in.close();
+			}
+			secretToken = props.getProperty("secretToken");
+			System.out.println("token : "+secretToken);
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
+		
 		String control = req.getParameter("control");
 		LOG.info("ServletOne - service - control = "+control);
-		if (CONTROL.equals(control)) {
+		if (secretToken.equals(control)) {
 			LOG.info("ServletOne - service - ok");
 			
 			try {
@@ -56,6 +81,8 @@ public class ServletOne extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			
+
 		}
 		else {
 			LOG.warning("ServletOne - service - KO");

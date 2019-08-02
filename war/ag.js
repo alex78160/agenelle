@@ -1,29 +1,80 @@
 /*
- * ag.js
+ * ag.js :
  * gestion de la page principale
  * 
  */
 
-    try {
-      if (! window.badBrowser) {
-        console.log("browser ok");
-      }
+  try {
+    if (! window.badBrowser) {
+      console.log("browser ok");
     }
-    catch(error){}
+  }
+  catch(error){}
 
-    ag$ = jQuery.noConflict();
-    ag$(document).ready(function(){
+  ag$ = jQuery.noConflict();
+  ag$(document).ready(function(){
     	
-        ag$.ajaxSetup({
-    	    timeout: 10000
-    	});
-    	
-        ag$("#resume").click(function(){
-            document.location.href = "/agenelle/dlservlet?index=2";
-        });
-        ag$("#cv").click(function(){
-            document.location.href = "/agenelle/dlservlet?index=3";
-        });
+    ag$.ajaxSetup({
+	    timeout: 20000
+	});
+    
+    ag$("#accordion").accordion({
+    	heightStyle: "content", 
+    	collapsible: true,
+    	activate: function( event, ui ) {
+    		if (ui.newPanel.find("#key").length == 1) {
+    			ui.newPanel.find("#key").focus();
+    		}
+    	}
+    });
+
+    
+    ag$("#cv").click(function(){
+        document.location.href = "/agenelle/dlservlet?index=3";
+    });
+    ag$("#nz2012").click(function(){
+        document.location.href = "https://photos.app.goo.gl/2m1jdLhVwWEE92fH7";
+    });
+    ag$("#bol2011").click(function(){
+        document.location.href = "https://photos.app.goo.gl/2S56yqg2kGm7rpec6";
+    });
+    ag$("#zz2010").click(function(){
+        document.location.href = "https://photos.app.goo.gl/7zW5wogshMzyB6WP8";
+    });
+    ag$("#hw2009").click(function(){
+        document.location.href = "https://photos.app.goo.gl/5DdfBp5D7b7YFWVq6";
+    });
+    
+    var vGap = 10;
+    var hGap = 30;
+    
+    /*
+    ag$("#ag-pic").hover(function(e){
+        
+        ag$("body").append("<p id='preview'><img src='ag3-3-3.jpg' alt='me' /></p>");                                
+        
+        ag$("#preview")
+            .css("top",(e.pageY - vGap) + "px")
+            .css("left",(e.pageX + hGap - 410) + "px")
+            .css("position","absolute")
+            .fadeIn("fast");
+            
+        //ag$("#preview").show();
+        
+    },
+    function(){
+        ag$("#preview").remove();
+    }); 
+    
+    ag$("#ag-pic").mousemove(function(e){
+    	//ag$("#preview").hide();
+        
+    	ag$("#preview")
+            .css("top",(e.pageY - vGap) + "px")
+            .css("left",(e.pageX + hGap - 410) + "px");
+            
+    });
+    */    
 
     ag$(function() {
         var name = ag$("#name"),
@@ -75,7 +126,7 @@
           },
           */
           height: "auto",
-          width: 500,
+          width: 400,
           modal: true,
           buttons: {
             "Envoyer": function() {
@@ -168,5 +219,58 @@
           .click(function() {
         	  ag$("#dialog-form").dialog("open");
           });
+        
+        ag$("#key").keyup(function() {
+        	var keyLength = ag$("#key").val().length;
+        	console.log("length : "+keyLength);
+        	if (keyLength == 6) {
+        		ag$("#checkTokenAnim").show();
+        		ag$("#checkTokenAnimError").hide();
+        		ag$("#checkTokenAnimOK").hide();
+        		
+        		//TODO poster le token et afficher la réponse
+        		ag$.post( "/agenelle/login"
+                    ,{key: ag$("#key").val(), token: ag$("#key").val()}
+                    ,function(data) {
+                      try {
+                        console.log(data.status);
+                      }
+                      catch(error){}
+                      ag$("#checkTokenAnim").hide();
+              		  if(data.status == 'ok') {
+              			ag$("#checkTokenAnimError").hide();
+              			ag$("#checkTokenAnimTime").hide();
+                		ag$("#checkTokenAnimOK").show();
+              		  }
+              		  else {
+              			ag$("#key").val("");
+              			ag$("#checkTokenAnimOK").hide();
+              			if (data.cause != null && data.cause == 'timeout') {
+              			  ag$("#checkTokenAnimError").hide();
+              			  ag$("#checkTokenAnimTime").show();
+              			}
+              			else {
+              			  ag$("#checkTokenAnimTime").hide();
+              			  ag$("#checkTokenAnimError").show();
+              			}
+              		  }
+              		}
+              	    ,"json")
+                        .fail(function() {
+                        	ag$("#checkTokenAnimError").hide();
+                    		ag$("#checkTokenAnimOK").hide();
+                    		ag$("#checkTokenAnim").hide();
+                        }
+                );
+        	}
+        	else {
+        		ag$("#checkTokenAnim").hide();
+        		ag$("#checkTokenAnimError").hide();
+        		ag$("#checkTokenAnimOK").hide();
+        	}
+        	
+        });
+        
       });
-    });
+    
+   });

@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import net.sf.json.JSONObject;
+import org.json.JSONObject;
 
 import com.genelle.alexandre.bean.MailBean;
 import com.genelle.alexandre.bean.ResponseBean;
@@ -20,6 +20,13 @@ import com.genelle.alexandre.server.mail.MailService;
 import com.genelle.alexandre.server.mail.MailServiceFactory;
 
 
+/**
+ * cette servlet sert � envoyer un mail
+ * elle intercepte les requ�tes �mises � partir du formulaire de contact sur la
+ * page principale
+ * @author alexandre.genelle
+ *
+ */
 public class MsgServlet extends HttpServlet {
 	
 	/**
@@ -37,7 +44,7 @@ public class MsgServlet extends HttpServlet {
 		Map<String, String> headers = HeaderProcess.extractHeaders(req);
 		LOG.info("addr : "+req.getRemoteAddr());
 		
-		//TODO recuperer l'IP et limiter un message par minute par IP
+		//TODO recuperer l'IP et limiter un message par minute / jour par IP
 		LOG.info("MsgServlet - doPost");
 		JSONObject jso = new JSONObject();
 		try {
@@ -48,8 +55,8 @@ public class MsgServlet extends HttpServlet {
 	        */
 			
 			MailBean mailBean = buildMailBean(req);
-			MailService mailService = MailServiceFactory.getInstance(mailBean);
-			ResponseBean responseBean = mailService.sendMail();
+			MailService mailService = MailServiceFactory.getInstance();
+			ResponseBean responseBean = mailService.sendMail(mailBean);
 			
 			LOG.info("status : "+responseBean.getStatus());
 			LOG.info("lib : "+responseBean.getLib());

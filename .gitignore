@@ -1,0 +1,16 @@
+.classpath
+**/*.class
+.project
+build/
+bin/
+rubis.launch
+server_tomcat_rubis.xml
+.settings
+build-local.properties
+.class
+props-ignore.properties
+gwt-unitCache/
+war/WEB-INF/deploy
+war/WEB-INF/*
+!war/WEB-INF/lib
+
